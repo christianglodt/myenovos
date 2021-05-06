@@ -116,11 +116,10 @@ if __name__ == '__main__':
     else:
         customer = e.user.customers[0]
 
-    contracts = customer.contracts
     if args.contract_nr:
         contract = customer.get_contract_by_nr(args.contract_nr)
     else:
-        contract = next((c for c in contracts if c.open and c.kind == 'Electricity'), None)
+        contract = next((c for c in customer.contracts if c.open and c.kind == 'Electricity'), None)
 
     start_dt = None
     if args.start_ts:
