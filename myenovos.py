@@ -68,9 +68,12 @@ class User:
     def customer_nrs(self):
         return self._info['partner_id']
 
-    @property
+    @functools.cached_property
     def customers(self):
         return [Customer(self.my_enovos, c_nr) for c_nr in self.customer_nrs]
+
+    def get_customer_by_nr(self, customer_nr):
+        return next((c for c in self.customers if c.customer_nr == customer_nr), None)
 
     def __repr__(self):
         return f"<User first_name='{self._info['first_name']}' last_name='{self._info['last_name']}' email='{self._info['email']}'>"
@@ -100,7 +103,7 @@ class MyEnovos:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Fetch data from my.enovos.lu. Can be invoked with @argsfile to supply arguments from a file (1 per line)', fromfile_prefix_chars='@')
+    parser = argparse.ArgumentParser(description='Fetch data from my.enovos.lu. Can be invoked with @argsfile to supply arguments from a file (1 per line).', fromfile_prefix_chars='@')
     parser.add_argument('username', type=str, help='User name on https://my.enovos.lu')
     parser.add_argument('password', type=str, help='Password on https://my.enovos.lu')
     parser.add_argument('--customer', '-cu', type=str, dest='customer_nr', default=None, help='Customer number (defaults to first customer number of user)')
@@ -112,7 +115,7 @@ if __name__ == '__main__':
     e = MyEnovos(args.username, args.password)
 
     if args.customer_nr:
-        customer = next((c for c in e.user.customers if c.customer_nr == args.customer_nr), None)
+        customer = e.user.get_customer_by_nr(args.customer_nr)
     else:
         customer = e.user.customers[0]
 
