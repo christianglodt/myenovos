@@ -20,7 +20,7 @@ def insert_contract_data(contract, influx, start_dt, end_dt):
     }
 
     points = []
-    for consumption in history:
+    for consumption in contract.get_history(start_dt, end_dt):
         if consumption['status'] != 'MACO':
             continue
 
