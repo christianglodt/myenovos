@@ -45,6 +45,8 @@ if __name__ == '__main__':
     parser.add_argument('password', type=str, help='Password on https://my.enovos.lu')
     parser.add_argument('contract', type=str, help='Contract number for which to get consumption history')
     parser.add_argument('influx_db', type=str, help='InfluxDB database name to import into')
+    parser.add_argument('--start-timestamp', type=str, dest='start_ts', default=None, help='Start unix timestamp (defaults to 1st of current month)')
+    parser.add_argument('--end-timestamp', type=str, dest='end_ts', default=None, help='End unix timestamp (defaults to current time)')
     parser.add_argument('--influx-host', type=str, default='localhost', help='defaults to localhost')
     parser.add_argument('--influx-port', type=int, default=8086, help='defaults to 8086')
     parser.add_argument('--influx-user', type=str, default='root', help='defaults to root')
