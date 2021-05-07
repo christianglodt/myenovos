@@ -25,7 +25,7 @@ def insert_contract_data(contract, influx, start_dt, end_dt):
             continue
 
         timestamp = dateutil.parser.isoparse(consumption['ts'])
-        value = consumption['value']
+        value = float(consumption['value'])
 
         points.append({
             'measurement': 'Enovos Consumption',
