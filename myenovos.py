@@ -121,12 +121,7 @@ if __name__ == '__main__':
     else:
         contract = next((c for c in customer.contracts if c.open and c.kind == 'Electricity'), None)
 
-    start_dt = None
-    if args.start_ts:
-        start_dt = datetime.datetime.fromtimestamp(float(args.start_ts))
-
-    end_dt = None
-    if args.end_ts:
-        end_dt = datetime.datetime.fromtimestamp(float(args.end_ts))
+    start_dt = datetime.datetime.fromtimestamp(float(args.start_ts)) if args.start_ts else None
+    end_dt = datetime.datetime.fromtimestamp(float(args.end_ts)) if args.end_ts else None
 
     print(json.dumps(contract.get_history(start_dt, end_dt), indent=2))

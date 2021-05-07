@@ -2,13 +2,13 @@
 
 import argparse
 import dateutil.parser
+import datetime
 import myenovos
 
 from influxdb import InfluxDBClient
 
 
-def insert_contract_data(contract, influx):
-    history = contract.get_history()
+def insert_contract_data(contract, influx, start_dt, end_dt):
 
     tags = {
         'contract_nr': contract.contract_data['vkont'],
@@ -52,6 +52,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    start_dt = datetime.datetime.fromtimestamp(float(args.start_ts)) if args.start_ts else None
+    end_dt = datetime.datetime.fromtimestamp(float(args.end_ts)) if args.end_ts else None
+
     e = myenovos.MyEnovos(args.username, args.password)
     customer = e.user.customers[0]
     contracts = customer.contracts
@@ -60,4 +63,4 @@ if __name__ == '__main__':
     influx = InfluxDBClient(args.influx_host, args.influx_port, args.influx_user, args.influx_password, args.influx_db)
     influx.create_database(args.influx_db)
 
-    insert_contract_data(contract, influx)
+    insert_contract_data(contract, influx, start_dt, end_dt)
