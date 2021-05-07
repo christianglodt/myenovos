@@ -88,3 +88,23 @@ optional arguments:
 ```
 
 It also supports the ```@argsfile``` syntax to supply arguments from a file.
+
+# Python API
+```myenovos.py``` can be imported as a Python module. The API is property based
+and can be used like this:
+
+```python
+>>> import myenovos
+>>> e = myenovos.MyEnovos('myusername', 'mypassword')
+>>> e.user
+<User first_name='Hombre' last_name='Incognito' email='user@example.com'>
+>>> e.user.customers  # a user can manage multiple customer accounts
+[<Customer customer_nr='1234567890'>]
+>>> e.user.customers[0].contracts  # a customer can have multiple contracts
+[<Contract contract_nr='012345678901' product='naturgas home T1'>, <Contract contract_nr='012345678902' product='naturstroum home mono'>]
+>>> e.user.customers[0].contracts[1].get_history()
+[{'status': 'MACO', 'value': 0.642, 'ts': '2021-04-30T22:00:00.000Z'}, {'status': 'MACO', 'value': 0.32, 'ts': '2021-04-30T22:15:00.000Z'}, {'status': 'MACO', 'value': 0.164, 'ts': '2021-04-30T22:30:00.000Z'}, {'status': 'MACO', 'value': 0.438, 'ts': '2021-04-30T22:45:00.000Z'}, {'status': 'MACO', 'value': 0.432, 'ts': '2021-04-30T23:00:00.000Z'}, ...]
+```
+Consumption data is returned unchanged from the my.enovos.lu service.
+
+Please refer to the source code for further details regarding the API.
