@@ -93,7 +93,7 @@ It also supports the ```@argsfile``` syntax to supply arguments from a file.
 ```myenovos.py``` can be imported as a Python module. The API is property based
 and can be used like this:
 
-```python
+```pycon
 >>> import myenovos
 >>> e = myenovos.MyEnovos('myusername', 'mypassword')
 >>> e.user
