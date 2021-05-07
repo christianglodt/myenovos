@@ -11,7 +11,7 @@ Includes a tool for inserting the data into an [InfluxDB](https://www.influxdata
 # Command line usage
 ```myenovos.py``` can be used as a command-line program to print data in JSON format:
 
-```bash
+```console
 $ ./myenovos.py --help
 
 usage: myenovos.py [-h] [--customer CUSTOMER_NR] [--contract CONTRACT_NR] [--start-timestamp START_TS] [--end-timestamp END_TS] username password
@@ -41,7 +41,7 @@ for the current month.
 To avoid giving credentials on the command line, options can be read from
 a file, like this:
 
-```bash
+```console
 $ cat myenovos.args
 myenovosuser@example.com
 myenovospassword
@@ -57,7 +57,7 @@ In addition to the my.enovos.lu credentials, it requires an Influx database name
 to be given. It supports the same options as ```myenovos.py``` for customer/contract
 selection, as well as options for the InfluxDB connection parameters:
 
-```bash
+```console
 $ ./myenovos-influxdb.py --help
 usage: myenovos-influxdb.py [-h] [--customer CUSTOMER_NR] [--contract CONTRACT_NR] [--start-timestamp START_TS] [--end-timestamp END_TS] [--influx-host INFLUX_HOST] [--influx-port INFLUX_PORT] [--influx-user INFLUX_USER] [--influx-password INFLUX_PASSWORD] username password influx_db
 
