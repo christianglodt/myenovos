@@ -90,7 +90,7 @@ optional arguments:
 It also supports the ```@argsfile``` syntax to supply arguments from a file.
 
 # Python API
-```myenovos.py``` can be imported as a Python module. The API is property based
+```myenovos.py``` can be imported as a Python module. The API is property-based
 and can be used like this:
 
 ```pycon
