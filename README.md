@@ -4,7 +4,7 @@ A Python module and command line program for accessing electricity consumption d
 Includes a tool for inserting the data into an [InfluxDB](https://www.influxdata.com/) time-series database, eg. for visualization with [Grafana](https://grafana.com/).
 
 # Requirements
-- Python 3.8
+- Python >= 3.8
 - ```myenovos.py``` needs the [requests](https://docs.python-requests.org/en/master/) library.
 - ```myenovos-influxdb.py``` needs the [influxdb client library](https://pypi.org/project/influxdb/) as well as [dateutil](https://pypi.org/project/python-dateutil/).
 
@@ -95,13 +95,17 @@ and can be used like this:
 
 ```pycon
 >>> import myenovos
+
 >>> e = myenovos.MyEnovos('myusername', 'mypassword')
 >>> e.user
 <User first_name='Hombre' last_name='Incognito' email='user@example.com'>
+
 >>> e.user.customers  # a user can manage multiple customer accounts
 [<Customer customer_nr='1234567890'>]
+
 >>> e.user.customers[0].contracts  # a customer can have multiple contracts
 [<Contract contract_nr='012345678901' product='naturgas home T1'>, <Contract contract_nr='012345678902' product='naturstroum home mono'>]
+
 >>> e.user.customers[0].contracts[1].get_history()
 [{'status': 'MACO', 'value': 0.642, 'ts': '2021-04-30T22:00:00.000Z'}, {'status': 'MACO', 'value': 0.32, 'ts': '2021-04-30T22:15:00.000Z'}, {'status': 'MACO', 'value': 0.164, 'ts': '2021-04-30T22:30:00.000Z'}, {'status': 'MACO', 'value': 0.438, 'ts': '2021-04-30T22:45:00.000Z'}, {'status': 'MACO', 'value': 0.432, 'ts': '2021-04-30T23:00:00.000Z'}, ...]
 ```
