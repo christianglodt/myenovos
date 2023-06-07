@@ -1,3 +1,8 @@
+# NOTE
+Due to an update to the my.enovos.lu service on 2023-06-07, this module does not currently work.
+
+The new version requires email-based 2FA, which this module does not support at this time.
+
 # myenovos
 A Python module and command line program for accessing electricity consumption data from https://my.enovos.lu (for which an account is required).
 
